@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'tinymce',
     'bootstrap4',
     'cloudinary',
     'awwards',
@@ -165,6 +166,7 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
