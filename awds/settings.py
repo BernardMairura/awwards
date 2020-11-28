@@ -148,6 +148,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+#Include Cloudinary's Python classes in your code:
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
