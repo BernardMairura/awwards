@@ -1,12 +1,12 @@
 from django import forms
-from .models import Project,UserProfile,Review
+from .models import Project,UserProfile,Review,User
 from django.contrib.auth.forms import UserCreationForm
 
 # creating the forms
 class ProjectAddForm(forms.ModelForm):
     class Meta:
-        model = Movie
-        fields = ('title', 'description', 'released_date', 'director', 'cast', 'image',)
+        model = Project
+        fields = ('title', 'image', 'body')
 # creating form for creating users
 
 class RegistrationForm(UserCreationForm):
