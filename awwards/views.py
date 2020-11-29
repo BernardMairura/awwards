@@ -19,4 +19,50 @@ def home(request):
     #     'projects':projects
     # }
     return render(request, 'index.html')
+
+
+    # registering the user
+def register(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST or None)
+            if form.is_valid():
+                form.save()
+                return redirect("home")
+        else:
+            form = RegistrationForm(request.POST or None)
+        return render(request, 'rating/register.html', {'form': form})
+
+# log in 
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        if request.method == 'POST':
+            # now we get the data from html templates
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            # authenticating the credentials
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                print("User is notNone") #meaning that the credentials are correct
+                if user.is_active:
+                    login(request, user)
+                    return redirect("home")
+                else:
+                    return render(request, 'rating/login.html', {'error-message': 'Your account has been banned.'})
+            else:
+                return render(request, 'rating/login.html', {'error-message': 'Invalid Username or Password'})
+        return render(request, 'rating/login.html')
+
+# logout
+def logout_user(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect("home")
+    else:
+        return redirect("login_user")
     
