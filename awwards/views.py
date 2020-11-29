@@ -33,7 +33,7 @@ def register(request):
                 return redirect("home")
         else:
             form = RegistrationForm(request.POST or None)
-        return render(request, 'rating/register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 # log in 
 def login_user(request):
@@ -53,10 +53,10 @@ def login_user(request):
                     login(request, user)
                     return redirect("home")
                 else:
-                    return render(request, 'rating/login.html', {'error-message': 'Your account has been banned.'})
+                    return render(request, 'login.html', {'error-message': 'Your account has been banned.'})
             else:
-                return render(request, 'rating/login.html', {'error-message': 'Invalid Username or Password'})
-        return render(request, 'rating/login.html')
+                return render(request, 'login.html', {'error-message': 'Invalid Username or Password'})
+        return render(request, 'login.html')
 
 # logout
 def logout_user(request):
@@ -65,4 +65,17 @@ def logout_user(request):
         return redirect("home")
     else:
         return redirect("login_user")
+
+
+#creating user profile
+def profile(request, user):
+    # get the contents by that user
+    username = User.objects.get(username=user)
+    
+    reviews = Review.objects.filter(user=username)
+    context = {
+        'reviews':reviews,
+        'username': username
+    }
+    return render(request, 'profile.html', context)
     
