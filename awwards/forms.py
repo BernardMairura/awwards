@@ -21,13 +21,13 @@ class PostForm(forms.ModelForm):
         model = Review
         fields = ('review', 'rating')
 
-# class VotesForm(forms.ModelForm):
-#     '''
-#     Form for rating projects posted
-#     '''
-#     class Meta:
-#         model = Review
-#         fields = ('design','usability','content')
+class VotesForm(forms.ModelForm):
+    '''
+    Form for rating projects posted
+    '''
+    class Meta:
+        model = Review
+        fields = ('design','usability','content')
 
 # class ReviewForm(forms.ModelForm):
 #     class Meta:
