@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect,Http404
-from .models import Project,Review,NewsLetterRecipients,Comments,UserProfile
+from .models import Project,Review,NewsLetterRecipients,Comments,Profile
 from .forms import ProjectAddForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project,UserProfile,Review,User,Comments
+from .models import Project,Profile,Review,User,Comments
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import Textarea,ModelForm,IntegerField
 

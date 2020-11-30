@@ -11,7 +11,7 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null=True,related_name='profile')
     user_image=models.URLField(blank=True,null=True,default="https://res.cloudinary.com/mairura/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1605442723/p3t7keywhkmswljeuu9x.jpg")
     bio=HTMLField(max_length=150,blank=True,null=True)
@@ -24,7 +24,7 @@ class UserProfile(models.Model):
     @receiver(post_save, sender=User)
     def create_profile(sender, instance, created, **kwargs):
         if created:
-            UserProfile.objects.create(user=instance)
+            Profile.objects.create(user=instance)
      
     @receiver(post_save, sender=User) 
     def save_profile(sender,instance,**kwargs):
@@ -49,12 +49,12 @@ class UserProfile(models.Model):
     '''
     @classmethod
     def get_by_id(cls,id):
-        profile = UserProfile.objects.get(user = id)
+        profile = Profile.objects.get(user = id)
         return profile
     
     @classmethod
     def filter_by_id(cls,id): 
-        profile = UserProfile.objects.filter(user = id).first()
+        profile = Profile.objects.filter(user = id).first()
         return profile
     
     def __str__(self):
