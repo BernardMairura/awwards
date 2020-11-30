@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect,Http404
-from .models import Project,Review,NewsLetterRecipients,Comments
+from .models import Project,Review,NewsLetterRecipients,Comments,UserProfile
 from .forms import ProjectAddForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
@@ -126,7 +126,7 @@ def profile(request,username):
     current_user = request.user
     
     try:
-        profile_details = UserProfile.get_by_id(profile.id)
+        profile_details = UserProfile.get_by_id(user.id)
     except:
         profile_details = UserProfile.filter_by_id(profile.id)
     projects = Projects.get_profile_projects(profile.id)
