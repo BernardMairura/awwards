@@ -8,9 +8,9 @@ from django.contrib.auth import login,logout,authenticate
 # Create your views here.
 def home(request):
     # getting objects from the database
-    projet = Project.objects.all()
+    projets = Project.objects.all()
 
-    # search query
+    #search query
     # query = request.GET.get('q')
     # if query:
     #     projects = Project.objects.filter(title__icontains=query)
@@ -19,6 +19,17 @@ def home(request):
     #     'projects':projects
     # }
     return render(request, 'index.html')
+
+# details
+def details(request, slug):
+    project = Project.objects.get(slug=slug)
+    # getting the user reviews
+    reviews = Review.objects.filter(movie=movie)
+    context = {
+        'project': project,
+        'reviews': reviews,
+    }
+    return render(request, 'details.html', context)
 
 
     # registering the user
