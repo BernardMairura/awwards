@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script>
+new WOW().init()
+</script>
+<script src="{% static 'js/base.js' %}"></script>
+<div class="container-fluid">
+    
+      
+ <br><br><br><br><br>   
+<h2 class="text-center text-info" style="margin-bottom: 10px;padding: 10px;outline: double;">| TOP PICKS |</h2>
+</div>
+<div class="row">
+{% for project in projects %}
+<div class="col-md-4">
+<div class="card-group wow fadeInLeft"  style="margin:2%;" data-aos='fade-up'>
+        <div class="view overlay zoom ">
+                <img src="{{project.image.url}}" class="card-img-top">
+                <div class="mask flex-center rgba-black-strong">
+                    <a href="{% url 'projects' project.pk %}" class="btn-lg btn-info" >| VIEW |<i class="far fa-chevron-double-right"></i>  </a>
+                </div>
+        </div>
+
+<div class="card-body">
+    <a href="{% url 'projects' project.pk %}"><p class="strong-text card-title"> <strong>{{project.title}}</strong> </p> </a> <hr class="bg-info">
+    <p class="text-light">{{project.date|date:"F d,Y"}}</p>
+    <p class="text-lg">By  | {{project.user}} |</p>
+ 
+</div>
+
+</div>
+
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
