@@ -1,23 +1,23 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect,Http404
 from .models import Project,Review
 from .forms import ProjectAddForm, RegistrationForm,PostForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    # getting objects from the database
-    projets = Project.objects.all()
 
     #search query
-    # query = request.GET.get('q')
-    # if query:
-    #     projects = Project.objects.filter(title__icontains=query)
+    try:
+        projects=Projects.objects.all()
+    except Exception as e:
+        raise  Http404()
 
-    # context = {
-    #     'projects':projects
-    # }
+    context = {
+        'projects':projects
+    }
     return render(request, 'index.html')
 
 # details
