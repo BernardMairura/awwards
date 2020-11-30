@@ -7,7 +7,7 @@ from django.forms import Textarea,ModelForm,IntegerField
 class ProjectAddForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('title', 'image', 'body')
+        fields = ('title','image','body', 'link')
 # creating form for creating users
 
 class RegistrationForm(UserCreationForm):
@@ -29,10 +29,10 @@ class VotesForm(forms.ModelForm):
         model = Review
         fields = ('design','usability','content')
 
-# class ReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Comments
-#         fields = ('comments',)
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('comments',)
 
 
 class NewsLetterForm(forms.Form):
