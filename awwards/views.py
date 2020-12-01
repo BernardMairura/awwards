@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseRedirect,Http404
+from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
 from .models import Project,Review,NewsLetterRecipients,Comments,Profile
 from .forms import ProjectUploadForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm
 from django.contrib.auth.models import User
