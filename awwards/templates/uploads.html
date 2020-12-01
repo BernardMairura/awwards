@@ -1,0 +1,35 @@
+
+{% extends 'django_registration/base.html' %}
+{% load bootstrap4%}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-6"><br><br>
+        <div class="card card-cascade  wider text-center">
+            <div class="card-body card-body-cascade ">
+                <h1 class="  text-center blue-text" style="font-family: 'Lobster Two', cursive;">
+                    Add Project</h1> <br>
+                    <hr style="background-color: turquoise;">
+                <br>
+                <form action="{% url 'uploadproject' % }" method="POST" style="color: black; background:transparent" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form layout='inline' %}
+        
+                        <div class=" form-group">
+                    <input type="submit" class="btn btn-outline-info btn-lg text-center" value="Upload"
+                        style="text-align:center;">
+            </div>
+            {{form.media}}
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+{% endblock %}

@@ -1,13 +1,15 @@
 from django import forms
-from .models import Project,UserProfile,Review,User,Comments
+from .models import Project,Profile,Review,User,Comments
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import Textarea,ModelForm,IntegerField
 
 # creating the forms
-class ProjectAddForm(forms.ModelForm):
+class ProjectUploadForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('title', 'image', 'body')
+        fields = ('title','image','body', 'link')
+
+
 # creating form for creating users
 
 class RegistrationForm(UserCreationForm):
@@ -29,10 +31,10 @@ class VotesForm(forms.ModelForm):
         model = Review
         fields = ('design','usability','content')
 
-# class ReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Comments
-#         fields = ('comments',)
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('comments',)
 
 
 class NewsLetterForm(forms.Form):
