@@ -35,11 +35,11 @@ class Profile(models.Model):
 
     
     def update_profile_bio(self,new_bio):
-        self.profile_bio = new_bio
+        self.bio = new_bio
         self.save()
   
     def update_profile_photo(self,new_photo):
-        self.profile_photo = new_photo
+        self.user_image = new_photo
         self.save()
 
     def delete_profile(self):
@@ -94,7 +94,7 @@ class Project(models.Model):
     
    @classmethod
    def get_profile_projects(cls,profile):
-       projects = Project.objects.filter(profile__pk=profile)
+       projects = Project.objects.filter(user__pk=user)
        print(projects)
        return projects
     

@@ -126,10 +126,10 @@ def profile(request,username):
     current_user = request.user
     
     try:
-        profile_details = UserProfile.get_by_id(user.id)
+        profile_details = Profile.get_by_id(user.id)
     except:
-        profile_details = UserProfile.filter_by_id(profile.id)
-    projects = Projects.get_profile_projects(profile.id)
+        profile_details = Profile.filter_by_id(user.id)
+    projects = Project.get_profile_projects(user.id)
     
     return render(request, 'profile.html',{"profile":profile,"profile_details":profile_details,"projects":projects}) 
 
