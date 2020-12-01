@@ -53,10 +53,13 @@ def projects(request,project_id):
         
     if request.method == 'POST':
         form = VotesForm(request.POST)
+        print('from',form)
         if form.is_valid():
+            
             rate = form.save(commit=False)
             rate.user = request.user
             rate.project = project_id
+           
             rate.save()
         return redirect('projects',project_id)
         
@@ -132,17 +135,19 @@ def projects(request,project_id):
 
 
 @login_required
-def profile(request,username):
-    profile = User.objects.get(username=username)
-    current_user = request.user
+def profile(request,user_id):
+    profile= Profile.objects.get(user__id=user_id)
+    print(profile)
+    # current_user = request.profile
     
-    try:
-        profile_details = Profile.get_by_id(user.id)
-    except:
-        profile_details = Profile.filter_by_id(user.id)
-    projects = Project.get_profile_projects(user.id)
     
-    return render(request, 'profile.html',{"profile":profile,"profile_details":profile_details,"projects":projects}) 
+    # try:
+    #     profile_details = Profile.get_by_id(user.id)
+    # except:
+    #     profile_details = Profile.filter_by_id(user.id)
+    projects = Project.get_profile_projects(profile.user_id)
+    
+    return render(request, 'profile.html',{"profile":profile,"projects":projects}) 
 
 
 @login_required(login_url='accounts/login/')

@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>AW3ARDS</title>
+        <title>AWWARDS</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -41,26 +41,24 @@
             <div class="row top-section">
                 <div class="profile-image">
 
-                    <img src="{{profile_details.image.url}}" alt="profile-photo" width="150" height="150" style="margin-top:10px;outline: double;"><br><br>
+                    <img src="{{profile.image.url}}" alt="profile-photo" width="150" height="150" style="margin-top:10px;outline: double;"><br><br>
 
 
-                    <h4 class=" text-center" style="outline: double;"><strong>{{ profile.username }}</strong></h4>
+                    <h4 class=" text-center" style="outline: double;"><strong>{{ profile.user.username }}</strong></h4>
                 </div>
                 <div >
 
 
-                    {% if profile.username == user.username %}
+                   
                     <li class="list-inline-item">
 
                     </li>
-                    {% else %}
-                   
-                    {% endif %}
+                  
                     </ul>
-                    {% if profile.username == user.username %}
+                    
 
 
-                    {% endif %}
+                
                 </div>
             </div>
         </div>
@@ -73,7 +71,7 @@
 
         <h3><em>{{profile.bio}}</em></h3>
         <p style="font-size: 22px; font-weight:bold;margin:auto; padding:2px;">Username: </p>
-        <p class="text-info">{{profile.username}}</p>
+        <p class="text-info">{{profile.user.username}}</p>
     <p class="card-text text-light" style="font-size:16px;font-weight:bold;">{{profile.contact}}</p>
     <p class="card-text" style="font-size:14px;color:rgba(238, 239, 245, 0.63);font-weight:bold;">
         Contact email: </p>
