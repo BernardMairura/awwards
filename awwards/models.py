@@ -18,6 +18,8 @@ class Profile(models.Model):
     contact = models.CharField(max_length=10,default=1234567800)
 
 
+
+
     '''
     Creating user profile and saving
     '''
@@ -49,7 +51,7 @@ class Profile(models.Model):
     '''
     @classmethod
     def get_by_id(cls,id):
-        profile = Profile.objects.get(user = id)
+        profile = Profile.objects.get(user= id)
         return profile
     
     @classmethod
@@ -58,7 +60,7 @@ class Profile(models.Model):
         return profile
     
     def __str__(self):
-        return self.bio
+        return self.user.username
 
 
 
@@ -93,8 +95,8 @@ class Project(models.Model):
        return projects 
     
    @classmethod
-   def get_profile_projects(cls,profile):
-       projects = Project.objects.filter(user__pk=user)
+   def get_profile_projects(cls,user_id):
+       projects = Project.objects.filter(user__pk=user_id)
        print(projects)
        return projects
     
@@ -131,7 +133,7 @@ class Review(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     review = models.TextField(max_length=750,blank=True, null=True)
     review_date=models.DateField(auto_now_add=True)
-    rating=models.FloatField(validators=[MinValueValidator(1),MaxValueValidator(10)])
+    rating=models.TextField(blank=True,null=True)
 
     def __str__(self):
         return self.user.username

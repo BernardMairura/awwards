@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework.authtoken',
     'rest_framework',
     'crispy_forms',
     'tinymce',
@@ -195,5 +196,13 @@ cloudinary.config(
   cloud_name = "hnac2wgc2", 
   api_key = "784718373871472", 
   api_secret = "WF8SujRbZQYIH3EdhIV6TLZrtRE" 
+  
 )
 
+
+#rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}

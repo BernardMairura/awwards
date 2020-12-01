@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from django.conf import settings
 from django.contrib.auth import views as auth_views
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     re_path(r'login/', auth_views.LoginView, {'template_name': "users/registration/login.html"},name='login'),
     re_path(r'logout/', auth_views.LogoutView.as_view(),{'next_page': settings.LOGIN_REDIRECT_URL}, name='logout'),
+    re_path(r'^api-token-auth/', obtain_auth_token)
 ]
