@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
 from .models import Project,Review,NewsLetterRecipients,Comments,Profile
-from .forms import ProjectUploadForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm
+from .forms import ProjectUploadForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm,ProfileEditForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
@@ -14,7 +14,7 @@ from rest_framework import status
 from django.template.loader import render_to_string
 from django.views.generic import RedirectView
 from .permissions import IsAdminOrReadOnly
-from .serializer import ProfileSerializer,ProjectsSerializer
+from .serializer import ProfileSerializer,ProjectSerializer
 from .forms import ProfileEditForm,ProjectUploadForm,VotesForm,ReviewForm
 
 # Create your views here.
@@ -211,15 +211,15 @@ class ProfileList(APIView):
 '''
 Using serializer for (GET) projects
 '''
-class ProjectsList(APIView):
+class ProjectList(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get(self,request,format=None):
-        all_projects = Projects.objects.all()
-        serializers = ProjectsSerializer(all_projects,many=True)
+        all_projects = Project.objects.all()
+        serializers = ProjectSerializer(all_projects,many=True)
         return Response(serializers.data)
     
     def post(self, request, format=None):
-        serializers = ProjectsSerializer(data=request.data)
+        serializers = ProjectSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)

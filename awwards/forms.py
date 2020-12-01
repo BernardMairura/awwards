@@ -31,6 +31,11 @@ class VotesForm(forms.ModelForm):
         model = Review
         fields = ('design','usability','content')
 
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('user_image','bio','contact') 
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Comments
