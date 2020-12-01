@@ -95,7 +95,7 @@
   </div>
 </div>
     {%else%}
-    <p class="alert alert-success">Thank you for rating</p>
+    <p class="alert alert-success">Thank you for your review</p>
     {%endif %}
     {% else %}
     <a href="/accounts/login" class="btn btn-outline-info ">| Log in to rate |</a>
@@ -112,7 +112,7 @@
                                         <th class="text-info">Voters</th>
                                         <th class="text-info">Rating</th>
                                         {%for you in all%}<tr>
-                                                <td> <img src="{{you.user.profile.user_photo.url}}" alt="" width='30px' height="30px">  {{you.user}}</td>
+                                                <td> <img src="{{you.user.profile.image.url}}" alt="" width='30px' height="30px">  {{you.user}}</td>
                                                 <td>
                                                         <div class="design">
                                                                 <a href="" class="scores text-success">| DESIGN:{{you.design}}.0</a>

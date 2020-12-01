@@ -124,7 +124,7 @@ class Project(models.Model):
 
 
 class Review(models.Model):
-    project=models.ForeignKey(Project,on_delete=models.CASCADE)
+    project=models.IntegerField(default=0)
     design=models.PositiveIntegerField(default=0,validators=[MaxValueValidator(10)])
     usability=models.PositiveIntegerField(default=0,validators=[MaxValueValidator(10)])
     content=models.PositiveIntegerField(default=0,validators=[MaxValueValidator(10)])
