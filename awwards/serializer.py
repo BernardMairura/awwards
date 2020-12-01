@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('user','user_image','bio') 
         
         
-class ProjectsSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Projects
+        model = Project
         fields = ('title','image','body','link')
