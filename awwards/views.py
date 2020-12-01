@@ -1,10 +1,21 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseRedirect,Http404
+from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
 from .models import Project,Review,NewsLetterRecipients,Comments,Profile
 from .forms import ProjectUploadForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
+
+from rest_framework import authentication, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+
+from django.template.loader import render_to_string
+from django.views.generic import RedirectView
+from .permissions import IsAdminOrReadOnly
+from .serializer import ProfileSerializer,ProjectsSerializer
+from .forms import ProfileEditForm,ProjectUploadForm,VotesForm,ReviewForm
 
 # Create your views here.
 
@@ -180,6 +191,39 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request,'search.html',{"message":message,"projects":projects})
+
+
+class ProfileList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get(self,request,format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles,many=True)
+        return Response(serializers.data)
+    
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+'''
+Using serializer for (GET) projects
+'''
+class ProjectsList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get(self,request,format=None):
+        all_projects = Projects.objects.all()
+        serializers = ProjectsSerializer(all_projects,many=True)
+        return Response(serializers.data)
+    
+    def post(self, request, format=None):
+        serializers = ProjectsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
