@@ -133,7 +133,7 @@ class Review(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     review = models.TextField(max_length=750,blank=True, null=True)
     review_date=models.DateField(auto_now_add=True)
-    rating=models.FloatField(validators=[MinValueValidator(1),MaxValueValidator(10)])
+    rating=models.TextField(blank=True,null=True)
 
     def __str__(self):
         return self.user.username
