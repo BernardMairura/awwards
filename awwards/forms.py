@@ -7,7 +7,7 @@ from django.forms import Textarea,ModelForm,IntegerField
 class ProjectUploadForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('title','image','body', 'link')
+        fields = ('title','image','body', 'link','user')
 
 
 # creating form for creating users

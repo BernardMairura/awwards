@@ -110,14 +110,14 @@
 		<div class="nav__content">
 			<ul class="nav__list">
 				<li class="nav__list-item active-nav"><a href="{% url 'home' %}" class="hover-target">HOME</a></li>
-        <li class="nav__list-item"><a href="{% url 'profile' user_id=user.id %}"  class="hover-target">PROFILE</a></li>
+        <li class="nav__list-item"><a href="{% url 'profile' username=user %}"  class="hover-target">PROFILE</a></li>
         {% if user.is_authenticated %}
         <li class="nav__list-item"><a href="/accounts/login/" class="hover-target">LOG OUT</a></li>
-        <li class="nav__list-item"><a href="{% url 'uploadproject' %}" class="hover-target">SUBMIT SITE</a></li>
+        <li class="nav__list-item"><a href="{% url 'uploadproject' %}" class="hover-target">ADD A PROJECT</a></li>
         {% else %}
-        <li class="nav__list-item"><a href="accounts/login/" class="hover-target">LOG IN</a></li>
+        <li class="nav__list-item"><a href="accounts/login/" class="hover-target">LOGIN</a></li>
         {% endif %}
-				<li class="nav__list-item"><a href="#" data-toggle="modal" data-target="#modalSubscriptionForm" class="hover-target">SUBSCRIBE</a></li>
+				<li class="nav__list-item"><a href="#" data-toggle="modal" data-target="#modalSubscriptionForm" class="hover-target"></a></li>
         
        <form action="{% url 'search_results' %}" role="search" >
           <input type="search" class="text-dark">
@@ -147,6 +147,27 @@
   {% block content %}
   {% include "navbar.html" %}
   {% endblock %}
+
+  <div class="footer"  style="outline: double;">
+
+    <div class="footer-copyright text-center text-lg">© 2020 :
+    <a class="text-info" href="https://github.com/BenardMairura">| AWWARDS |</a>
+    </div>
+
+    <div class="dropdown dropleft text-lg" style="display: flex; justify-content: center;">
+
+      <!--Trigger-->
+      <button class="btn-block btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" style="size: 70px;">|GET APIS |</button>
+
+
+      <!--Menu-->
+      <div class="dropdown-menu dropdown-info">
+        <a class="dropdown-item" href="{% url 'profile_list' %}">Profiles</a>
+        <a class="dropdown-item" href="{% url 'projects_list' %}">Projects</a>
+      </div>
+    </div>
+    <br><br>
 
   {% block scripts %}
 

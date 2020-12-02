@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_list_or_404
 from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
 from .models import Project,Review,NewsLetterRecipients,Comments,Profile
 from .forms import ProjectUploadForm, RegistrationForm,PostForm, NewsLetterForm,VotesForm,ReviewForm,ProfileEditForm
@@ -13,9 +13,10 @@ from rest_framework import status
 
 from django.template.loader import render_to_string
 from django.views.generic import RedirectView
-from .permissions import IsAdminOrReadOnly
 from .serializer import ProfileSerializer,ProjectSerializer
-from .forms import ProfileEditForm,ProjectUploadForm,VotesForm,ReviewForm
+from .permissions import IsAdminOrReadOnly
+
+
 
 # Create your views here.
 
@@ -28,7 +29,7 @@ def home(request):
     }
     return render(request,'index.html',context)
 
-    
+@login_required(login_url="/accounts/login/")    
 def projects(request,project_id):
     try:
         projects = Project.objects.get(id=project_id)
@@ -134,20 +135,29 @@ def projects(request,project_id):
 
 
 
-@login_required
-def profile(request,user_id):
-    profile= Profile.objects.get(user__id=user_id)
+@login_required(login_url="/accounts/login/")
+def profile(request,username=None):
+    profile= Profile.objects.get(user=username)
     print(profile)
-    # current_user = request.profile
+    
+
+    # obj = get_object_or_404(User, username=username)
+    # user = obj.profile
+    # context = {
+    #     "object": obj,
+    #     "user": user,
+    # }
+
+    current_user = request.user
     
     
-    # try:
-    #     profile_details = Profile.get_by_id(user.id)
-    # except:
-    #     profile_details = Profile.filter_by_id(user.id)
-    projects = Project.get_profile_projects(profile.user_id)
+    try:
+        profile_details = Profile.get_by_id(user.id)
+    except:
+        profile_details = Profile.filter_by_id(user.id)
+    projects = Project.get_profile_projects(user.id)
     
-    return render(request, 'profile.html',{"profile":profile,"projects":projects}) 
+    return render(request, 'profile.html',{"profile":profile,"profile_details":profile_details,"projects":projects}) 
 
 
 @login_required(login_url='accounts/login/')
@@ -182,7 +192,7 @@ def uploadproject(request):
   context = {"form":form}
   return render(request,'uploads.html',context)
 
-
+@login_required(login_url="/accounts/login/")
 def search_results(request):
     if 'projects' in request.GET and request.GET['projects']:
         search_term = request.GET.get("projects")
