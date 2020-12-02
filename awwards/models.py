@@ -19,20 +19,21 @@ class Profile(models.Model):
     site=models.URLField(max_length=1000, blank=True, null=True)
     contact = models.CharField(max_length=10,default=1234567800)
 
-
+    def __str__(self):
+        return self.user.username
 
 
     '''
     Creating user profile and saving
     '''
-    @receiver(post_save, sender=User)
-    def create_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def create_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
      
-    @receiver(post_save, sender=User) 
-    def save_profile(sender,instance,**kwargs):
-        instance.profile.save()  
+    # @receiver(post_save, sender=User) 
+    # def save_profile(sender,instance,**kwargs):
+    #     instance.profile.save()  
         
     def save_profile(self):
         self.user
@@ -61,8 +62,12 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user = id).first()
         return profile
     
+    
+
+
     def __str__(self):
-        return self.user.username
+        return self.bio
+    
 
 
 

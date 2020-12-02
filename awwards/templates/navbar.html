@@ -22,7 +22,7 @@
   <div class="nav__content">
     <ul class="nav__list">
       <li class="nav__list-item active-nav"><a href="{% url 'home' %}" class="hover-target">HOME</a></li>
-      <li class="nav__list-item"><a href="{% url 'profile' user_id=user.id %}" class="hover-target">PROFILE</a></li>
+      <li class="nav__list-item"><a href="{% url 'profile' username=user %}" class="hover-target">PROFILE</a></li>
       {% if user.is_authenticated %}
       <li class="nav__list-item"><a href="accounts/logout/" class="hover-target">LOG OUT</a></li>
       <li class="nav__list-item"><a href="{% url 'uploadproject' %}" class="hover-target">ADD A PROJECT</a></li>
