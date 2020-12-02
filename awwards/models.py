@@ -103,8 +103,7 @@ class Project(models.Model):
        return projects
     
     
-   def __str__(self):
-       return self.title
+ 
 
 
    # auto generating the slug
