@@ -13,9 +13,10 @@ from rest_framework import status
 
 from django.template.loader import render_to_string
 from django.views.generic import RedirectView
-from .permissions import IsAdminOrReadOnly
 from .serializer import ProfileSerializer,ProjectSerializer
-from .forms import ProfileEditForm,ProjectUploadForm,VotesForm,ReviewForm
+from .permissions import IsAdminOrReadOnly
+
+
 
 # Create your views here.
 

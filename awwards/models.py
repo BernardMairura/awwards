@@ -13,8 +13,10 @@ from tinymce.models import HTMLField
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null=True,related_name='profile')
-    user_image=models.URLField(blank=True,null=True,default="https://res.cloudinary.com/mairura/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1605442723/p3t7keywhkmswljeuu9x.jpg")
+    # user_image=models.URLField(blank=True,null=True,default="https://res.cloudinary.com/mairura/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1605442723/p3t7keywhkmswljeuu9x.jpg")
+    user_image= CloudinaryField('image', null=True)
     bio=HTMLField(max_length=150,blank=True,null=True)
+    site=models.URLField(max_length=1000, blank=True, null=True)
     contact = models.CharField(max_length=10,default=1234567800)
 
 

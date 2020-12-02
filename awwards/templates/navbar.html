@@ -25,12 +25,12 @@
       <li class="nav__list-item"><a href="{% url 'profile' user_id=user.id %}" class="hover-target">PROFILE</a></li>
       {% if user.is_authenticated %}
       <li class="nav__list-item"><a href="accounts/logout/" class="hover-target">LOG OUT</a></li>
-      <li class="nav__list-item"><a href="{% url 'uploadproject' %}" class="hover-target">SUBMIT SITE</a></li>
+      <li class="nav__list-item"><a href="{% url 'uploadproject' %}" class="hover-target">ADD A PROJECT</a></li>
       <li class="nav__list-item"><a href="/admin" class="hover-target">ADMIN</a></li>
       {% else %}
-      <li class="nav__list-item"><a href="/accounts/login" class="hover-target">LOG IN</a></li>
+      <li class="nav__list-item"><a href="/accounts/login" class="hover-target">LOGIN</a></li>
       {% endif %}
-      <li class="nav__list-item"><a href="#" data-toggle="modal" data-target="#modalSubscriptionForm" class="hover-target">SUBSCRIBE</a></li>
+      <li class="nav__list-item"><a href="#" data-toggle="modal" data-target="#modalSubscriptionForm" class="hover-target"></a></li>
     </ul>
   </div>
 </div>		

@@ -10,7 +10,7 @@ Feature E: API endpoints
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user','user_image','bio') 
+        fields = ('user','user_image','bio','site') 
         
         
 class ProjectSerializer(serializers.ModelSerializer):
