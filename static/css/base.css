@@ -36,25 +36,25 @@ h3 {
   #one:hover{
     background: #F44336;
     color: white;
-    cursor: pointer;
+    
   }
-
+  /*cursor: pointer;*/
   #next:hover{
     background: #FFA726;
     color: white;
-    cursor: pointer;
+    /*cursor: pointer;*/
     
   }
 
   #three:hover{
     background:  #00ACC1;
     color: white;
-    cursor: pointer;
+    /*cursor: pointer;*/
     
   }
 
   @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+  @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
 body{
 	font-family: 'Montserrat', sans-serif;
@@ -528,6 +528,7 @@ body.nav-active .nav__list-item:nth-child(10) {
 body.light{
 	background-color: #fff;
 }
+
 body.light .cursor,
 body.light .cursor2,
 body.light .cursor3{

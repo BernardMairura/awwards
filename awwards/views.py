@@ -20,6 +20,19 @@ from .permissions import IsAdminOrReadOnly
 
 # Create your views here.
 
+def register(request):
+    form = UserCreationForm(request.POST or None)
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+           form.save()
+           return redirect ('index.html')
+        else:
+           return render(request, 'accounts/register.html', {'form': form})
+
+    else:
+        return render(request, 'accounts/register.html', {'form': form})
+
 
 def home(request):
     projects = Project.objects.all()
@@ -136,8 +149,8 @@ def projects(request,project_id):
 
 
 @login_required(login_url="/accounts/login/")
-def profile(request,username=None):
-    profile= Profile.objects.get(user=username)
+def profile(request,username):
+    profile= Profile.objects.get(username=username)
     print(profile)
     
 
@@ -152,10 +165,10 @@ def profile(request,username=None):
     
     
     try:
-        profile_details = Profile.get_by_id(user.id)
+        profile_details = Profile.get_by_id(profile.id)
     except:
-        profile_details = Profile.filter_by_id(user.id)
-    projects = Project.get_profile_projects(user.id)
+        profile_details = Profile.filter_by_id(profile.id)
+    projects = Project.get_profile_projects(profile.id)
     
     return render(request, 'profile.html',{"profile":profile,"profile_details":profile_details,"projects":projects}) 
 

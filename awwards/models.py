@@ -18,11 +18,6 @@ class Profile(models.Model):
     bio=HTMLField(max_length=150,blank=True,null=True)
     site=models.URLField(max_length=1000, blank=True, null=True)
     contact = models.CharField(max_length=10,default=1234567800)
-
-    def __str__(self):
-        return self.user.username
-
-
     '''
     Creating user profile and saving
     '''
@@ -54,13 +49,18 @@ class Profile(models.Model):
     '''
     @classmethod
     def get_by_id(cls,id):
-        profile = Profile.objects.get(user= id)
+        profile = Profile.objects.get(user = id)
         return profile
     
     @classmethod
     def filter_by_id(cls,id): 
         profile = Profile.objects.filter(user = id).first()
         return profile
+
+
+    def __str__(self):
+        return self.user.username
+
     
     
 
